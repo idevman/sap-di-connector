@@ -1,5 +1,4 @@
-﻿using Silifalcon.Rest.Connection;
-using IDevman.SAPConnector.DBMS;
+﻿using IDevman.SAPConnector.DBMS;
 using System;
 using System.Collections.Generic;
 
@@ -34,18 +33,16 @@ namespace IDevman.SAPConnector.Connector
         /// <summary>
         /// Execute pull action
         /// </summary>
-        /// <param name="rest">Rest connection</param>
         /// <param name="lastSyncDate">Last sync date</param>
         /// <returns></returns>
-        List<U> Pull(RestClient rest, DateTime lastSyncDate);
+        List<U> Pull(DateTime lastSyncDate);
 
         /// <summary>
         /// Commit fetch sync data
         /// </summary>
-        /// <param name="rest">Rest connection</param>
         /// <param name="commitDate">Confirm date</param>
         /// <returns></returns>
-        void CommitFetch(RestClient rest, DateTime commitDate);
+        void CommitFetch(DateTime commitDate);
 
         /// <summary>
         /// Create new record to sate

@@ -1,5 +1,4 @@
-﻿using Silifalcon.Rest.Connection;
-using IDevman.SAPConnector.DBMS;
+﻿using IDevman.SAPConnector.DBMS;
 using System;
 using System.Collections.Generic;
 
@@ -30,18 +29,16 @@ namespace IDevman.SAPConnector.Connector
         /// <summary>
         /// Push documents
         /// </summary>
-        /// <param name="rest">Rest connection</param>
         /// <param name="records">Documents to push</param>
         /// <returns></returns>
-        void Push(RestClient rest, List<T> records);
+        void Push(List<T> records);
 
         /// <summary>
         /// Commit sync data
         /// </summary>
-        /// <param name="rest">Rest connection</param>
         /// <param name="commitDate">Confirm date</param>
         /// <returns></returns>
-        void Commit(RestClient rest, DateTime commitDate);
+        void Commit(DateTime commitDate);
     }
 
 }

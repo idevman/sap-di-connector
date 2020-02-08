@@ -1,5 +1,4 @@
 ﻿using log4net;
-using Silifalcon.Rest.Connection;
 using IDevman.SAPConnector.DBMS;
 using System;
 using System.Collections.Generic;
@@ -36,17 +35,16 @@ namespace IDevman.SAPConnector.Connector
         /// Use last sync date to download the transfers from API to upload SAP also
         /// </summary>
         /// <param name="connection">Database connection</param>
-        /// <param name="rest">Rest client</param>
         /// <param name="lastSyncDate">Last download date</param>
         /// <returns>If was some data retrieved</returns>
-        public Fetched<U> Fetch(DBConnection connection, RestClient rest, DateTime lastSyncDate)
+        public Fetched<U> Fetch(DBConnection connection, DateTime lastSyncDate)
         {
             if (SyncDownload == null)
             {
                 throw new Exception("'SyncDownload' property not defined");
             }
             logger.Debug("Fetching changes");
-            List<U> response = SyncDownload.Pull(rest, lastSyncDate);
+            List<U> response = SyncDownload.Pull(lastSyncDate);
             if (response != null && response.Count > 0)
             {
                 logger.Info("Fetched " + response.Count + " records");
@@ -62,7 +60,10 @@ namespace IDevman.SAPConnector.Connector
         /// <summary>
         /// Upload to warehouse system
         /// </summary>
-        public void Upload(DBConnection connection, RestClient rest, DateTime lastSyncDate, DateTime confirmDate)
+        /// <param name="connection">Database connection</param>
+        /// <param name="lastSyncDate">Last synchronization date</param>
+        /// <param name="confirmDate">Confirming date</param>
+        public void Upload(DBConnection connection, DateTime lastSyncDate, DateTime confirmDate)
         {
             if (SyncUpload == null)
             {
@@ -81,11 +82,11 @@ namespace IDevman.SAPConnector.Connector
                     {
                         size = SyncUpload.PageSize;
                     }
-                    SyncUpload.Push(rest, records.GetRange(i, size));
+                    SyncUpload.Push(records.GetRange(i, size));
                     logger.Info("Uploading " + (100f * i / records.Count) + "%");
                 }
                 logger.Info("Uploading 100%");
-                SyncUpload.Commit(rest, confirmDate);
+                SyncUpload.Commit(confirmDate);
             }
         }
 
@@ -94,14 +95,9 @@ namespace IDevman.SAPConnector.Connector
         /// </summary>
         /// <param name="sap">SAP connection</param>
         /// <param name="connection">Database connection</param>
-        /// <param name="rest">Rest connection</param>
         /// <param name="fetched">Fetched data</param>
-        /// <param name="nowDate">Last sync date</param>
-        public void Storing(SAPConnection sap,
-                            DBConnection connection,
-                            RestClient rest,
-                            Fetched<U> fetched,
-                            DateTime nowDate)
+        /// <param name="nowDate">Current date sync date</param>
+        public void Storing(SAPConnection sap, DBConnection connection, Fetched<U> fetched, DateTime nowDate)
         {
             if (SyncDownload == null)
             {
@@ -129,7 +125,7 @@ namespace IDevman.SAPConnector.Connector
                 }
                 if (hasChanges)
                 {
-                    SyncDownload.CommitFetch(rest, nowDate);
+                    SyncDownload.CommitFetch(nowDate);
                 }
             }
         }
