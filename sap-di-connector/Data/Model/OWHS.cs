@@ -1,5 +1,6 @@
-﻿
-namespace IDevman.SAPConnector.Data
+﻿using System;
+
+namespace IDevman.SAPConnector.Data.Model
 {
 
 	/// <summary>
@@ -31,7 +32,7 @@ namespace IDevman.SAPConnector.Data
 		/// <returns></returns>
 		public bool IsActive()
 		{
-			return "Y".Equals(Inactive);
+			return "Y".Equals(Inactive, StringComparison.OrdinalIgnoreCase);
 		}
 
 	}

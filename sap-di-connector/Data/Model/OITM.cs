@@ -1,5 +1,6 @@
-﻿
-namespace IDevman.SAPConnector.Data
+﻿using System;
+
+namespace IDevman.SAPConnector.Data.Model
 {
 
 	/// <summary>
@@ -53,7 +54,7 @@ namespace IDevman.SAPConnector.Data
 		/// </summary>
 		public bool IsInventoryItem
 		{
-			get => "Y".Equals(InvntItem);
+			get => "Y".Equals(InvntItem, StringComparison.OrdinalIgnoreCase);
 		}
 
 		/// <summary>
@@ -61,7 +62,7 @@ namespace IDevman.SAPConnector.Data
 		/// </summary>
 		public bool IsSellItem
 		{
-			get => "Y".Equals(SellItem);
+			get => "Y".Equals(SellItem, StringComparison.OrdinalIgnoreCase);
 		}
 
 		/// <summary>
@@ -69,7 +70,7 @@ namespace IDevman.SAPConnector.Data
 		/// </summary>
 		public bool IsPurchaseItem
 		{
-			get => "Y".Equals(PrchseItem);
+			get => "Y".Equals(PrchseItem, StringComparison.OrdinalIgnoreCase);
 		}
 
 		/// <summary>
@@ -77,7 +78,7 @@ namespace IDevman.SAPConnector.Data
 		/// </summary>
 		public bool IsActive
 		{
-			get => "Y".Equals(frozenFor);
+			get => "Y".Equals(frozenFor, StringComparison.OrdinalIgnoreCase);
 		}
 
 		/// <summary>
@@ -86,7 +87,7 @@ namespace IDevman.SAPConnector.Data
 		/// <returns></returns>
 		public bool IsManageByBatches
 		{
-			get => "Y".Equals(ManBtchNum);
+			get => "Y".Equals(ManBtchNum, StringComparison.OrdinalIgnoreCase);
 		}
 
 	}

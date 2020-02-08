@@ -51,10 +51,10 @@
     <Compile Include="Connector\ISyncDownload.cs" />
     <Compile Include="Connector\ISyncUpload.cs" />
     <Compile Include="Connector\RestConnector.cs" />
-    <Compile Include="Data\OCRD.cs" />
-    <Compile Include="Data\OITM.cs" />
-    <Compile Include="Data\OPRQ.cs" />
-    <Compile Include="Data\OWHS.cs" />
+    <Compile Include="Data\Model\OCRD.cs" />
+    <Compile Include="Data\Model\OITM.cs" />
+    <Compile Include="Data\Model\OPRQ.cs" />
+    <Compile Include="Data\Model\OWHS.cs" />
     <Compile Include="DMBS\DBConnection.cs" />
     <Compile Include="Exceptions\SAPConnectionException.cs" />
     <Compile Include="Exceptions\SAPException.cs" />

@@ -1,5 +1,5 @@
 ﻿
-namespace IDevman.SAPConnector.Data
+namespace IDevman.SAPConnector.Data.Model
 {
 
 	/// <summary>
