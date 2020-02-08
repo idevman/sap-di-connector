@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sap-di-connector", "sap-di-connector\sap-di-connector.csproj", "{101C1F79-ED70-4AF3-AED6-66BAB98AC8FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tests", "tests\tests.csproj", "{60BB7616-297B-4A83-A318-454E524231BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{101C1F79-ED70-4AF3-AED6-66BAB98AC8FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{101C1F79-ED70-4AF3-AED6-66BAB98AC8FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{101C1F79-ED70-4AF3-AED6-66BAB98AC8FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{101C1F79-ED70-4AF3-AED6-66BAB98AC8FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60BB7616-297B-4A83-A318-454E524231BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60BB7616-297B-4A83-A318-454E524231BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60BB7616-297B-4A83-A318-454E524231BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60BB7616-297B-4A83-A318-454E524231BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B5B8C050-80C8-47D0-9B31-EE58D7B04E12}
+	EndGlobalSection
+EndGlobal

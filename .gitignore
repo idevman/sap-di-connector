@@ -1,0 +1,9 @@
+﻿################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/sap-di-connector/v16
+/packages
+/sap-di-connector/obj/Debug
+/sap-di-connector/bin/Debug
+/tests/obj/Debug
