@@ -40,7 +40,8 @@ namespace IDevman.SAPConnector.DBMS
         {
             if (SAPSettings.Current == null)
             {
-                SAPException exception = new SAPException(-1, "SAPSettings.Current not defined");
+                SAPException exception = new SAPException(-1, 
+                    string.Format(CultureInfo.InvariantCulture, Properties.Resources.SettingsNotDefined, "SAPSettings.Current"));
                 logger.Error(exception.Message, exception);
                 Debug.WriteLine(exception.Message);
                 throw exception;
@@ -75,17 +76,24 @@ namespace IDevman.SAPConnector.DBMS
         /// <returns>Data table loaded</returns>
         public DataTable CreateDataTable()
         {
-            DataSet dataSet = new DataSet();
-            SqlDataAdapter sqlAdapter = new SqlDataAdapter
+            DataTable dataTable = null;
+            using (DataSet dataSet = new DataSet())
+            using (SqlDataAdapter sqlAdapter = new SqlDataAdapter
             {
                 SelectCommand = SQLCommand
-            };
-            sqlAdapter.Fill(dataSet);
+            })
+            {
+                sqlAdapter.Fill(dataSet);
+                if (dataSet.Tables.Count > 0)
+                {
+                    dataTable = dataSet.Tables[0];
+                }
+            }
             SQLCommand = new SqlCommand
             {
                 Connection = SQLCommand.Connection
             };
-            return dataSet.Tables[0];
+            return dataTable;
         }
 
         /// <summary>

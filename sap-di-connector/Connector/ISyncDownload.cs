@@ -8,9 +8,9 @@ namespace IDevman.SAPConnector.Connector
     /// <summary>
     /// Provide method access to download and sync data
     /// </summary>
-    /// <typeparam name="T">Default type</typeparam>
-    /// <typeparam name="U">Rest data</typeparam>
-    public interface ISyncDownload<T, U>
+    /// <typeparam name="TModel">Default type</typeparam>
+    /// <typeparam name="TRest">Rest data</typeparam>
+    public interface ISyncDownload<TModel, TRest>
     {
 
         /// <summary>
@@ -28,14 +28,14 @@ namespace IDevman.SAPConnector.Connector
         /// </summary>
         /// <param name="record">Record to evaluate</param>
         /// <returns></returns>
-        bool IsNew(U record);
+        bool IsNew(TRest record);
 
         /// <summary>
         /// Execute pull action
         /// </summary>
         /// <param name="lastSyncDate">Last sync date</param>
         /// <returns></returns>
-        List<U> Pull(DateTime lastSyncDate);
+        List<TRest> Pull(DateTime lastSyncDate);
 
         /// <summary>
         /// Commit fetch sync data
@@ -51,7 +51,7 @@ namespace IDevman.SAPConnector.Connector
         /// <param name="sap">Sap connection</param>
         /// <param name="record">Record to create</param>
         /// <returns></returns>
-        T Create(DBConnection connection, SAPConnection sap, U record);
+        TModel Create(DBConnection connection, SAPConnection sap, TRest record);
 
         /// <summary>
         /// Update record to sate
@@ -60,7 +60,7 @@ namespace IDevman.SAPConnector.Connector
         /// <param name="sap">Sap connection</param>
         /// <param name="document">Document to create</param>
         /// <returns></returns>
-        T Update(DBConnection connection, SAPConnection sap, U document);
+        TModel Update(DBConnection connection, SAPConnection sap, TRest document);
 
     }
 
