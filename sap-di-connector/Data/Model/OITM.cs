@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace IDevman.SAPConnector.Data.Model
 {
@@ -90,5 +91,53 @@ namespace IDevman.SAPConnector.Data.Model
 			get => "Y".Equals(ManBtchNum, StringComparison.OrdinalIgnoreCase);
 		}
 
+		/// <summary>
+		/// Check object equality
+		/// </summary>
+		/// <param name="obj">To compare</param>
+		/// <returns>if is equal</returns>
+		public override bool Equals(Object obj)
+		{
+			if ((obj == null) || !GetType().Equals(obj.GetType()))
+			{
+				return false;
+			}
+			else
+			{
+				OITM b = (OITM)obj;
+				return
+					EqualityComparer<string>.Default.Equals(frozenFor, b.frozenFor) &&
+					EqualityComparer<string>.Default.Equals(InvntItem, b.InvntItem) &&
+					EqualityComparer<string>.Default.Equals(ItemCode, b.ItemCode) &&
+					EqualityComparer<string>.Default.Equals(ItemName, b.ItemName) &&
+					EqualityComparer<string>.Default.Equals(ManBtchNum, b.ManBtchNum) &&
+					EqualityComparer<string>.Default.Equals(PrchseItem, b.PrchseItem) &&
+					EqualityComparer<string>.Default.Equals(SellItem, b.SellItem) &&
+					EqualityComparer<string>.Default.Equals(WhsCode, b.WhsCode);
+			}
+		}
+
+		/// <summary>
+		/// Generates hash code
+		/// </summary>
+		/// <returns>hash code</returns>
+		public override int GetHashCode()
+		{
+			var hashCode = -1518328133;
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ItemCode);
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ItemName);
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ManBtchNum);
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(WhsCode);
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(InvntItem);
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(SellItem);
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(PrchseItem);
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(frozenFor);
+			hashCode = hashCode * -1521134295 + IsInventoryItem.GetHashCode();
+			hashCode = hashCode * -1521134295 + IsSellItem.GetHashCode();
+			hashCode = hashCode * -1521134295 + IsPurchaseItem.GetHashCode();
+			hashCode = hashCode * -1521134295 + IsActive.GetHashCode();
+			hashCode = hashCode * -1521134295 + IsManageByBatches.GetHashCode();
+			return hashCode;
+		}
 	}
 }

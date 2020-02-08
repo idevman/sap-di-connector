@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace IDevman.SAPConnector.Data.Model
 {
@@ -33,6 +34,40 @@ namespace IDevman.SAPConnector.Data.Model
 		public bool IsActive()
 		{
 			return "Y".Equals(Inactive, StringComparison.OrdinalIgnoreCase);
+		}
+
+		/// <summary>
+		/// Check object equality
+		/// </summary>
+		/// <param name="obj">To compare</param>
+		/// <returns>if is equal</returns>
+		public override bool Equals(Object obj)
+		{
+			if ((obj == null) || !GetType().Equals(obj.GetType()))
+			{
+				return false;
+			}
+			else
+			{
+				OWHS b = (OWHS)obj;
+				return
+					EqualityComparer<string>.Default.Equals(Inactive, b.Inactive) &&
+					EqualityComparer<string>.Default.Equals(WhsCode, b.WhsCode) &&
+					EqualityComparer<string>.Default.Equals(WhsName, b.WhsName);
+			}
+		}
+
+		/// <summary>
+		/// Generates hash code
+		/// </summary>
+		/// <returns>hash code</returns>
+		public override int GetHashCode()
+		{
+			var hashCode = -1730701478;
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(WhsCode);
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(WhsName);
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Inactive);
+			return hashCode;
 		}
 
 	}
