@@ -62,8 +62,10 @@
     <Compile Include="Data\Model\OCRD.cs" />
     <Compile Include="Data\Model\OITM.cs" />
     <Compile Include="Data\Model\OPRQ.cs" />
+    <Compile Include="Data\Model\ORDR.cs" />
     <Compile Include="Data\Model\OWHS.cs" />
     <Compile Include="Data\Model\PRQ1.cs" />
+    <Compile Include="Data\Model\RDR1.cs" />
     <Compile Include="DMBS\DBConnection.cs" />
     <Compile Include="Exceptions\SAPConnectionException.cs" />
     <Compile Include="Exceptions\SAPException.cs" />
