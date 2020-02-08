@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace IDevman.SAPConnector.Data
 {
 
@@ -31,7 +26,7 @@ namespace IDevman.SAPConnector.Data
 		public string Inactive { get; set; }
 
 		/// <summary>
-		/// Return is is active the warehouse
+		/// Return if is active the warehouse
 		/// </summary>
 		/// <returns></returns>
 		public bool IsActive()
@@ -40,4 +35,5 @@ namespace IDevman.SAPConnector.Data
 		}
 
 	}
+
 }
