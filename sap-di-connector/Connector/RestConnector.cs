@@ -3,6 +3,8 @@ using IDevman.SAPConnector.DBMS;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Globalization;
+using IDevman.SAPConnector.Extensions;
 
 namespace IDevman.SAPConnector.Connector
 {
@@ -10,9 +12,9 @@ namespace IDevman.SAPConnector.Connector
     /// <summary>
     /// Data connector class
     /// </summary>
-    /// <typeparam name="T">Default type</typeparam>
-    /// <typeparam name="U">Rest data</typeparam>
-    public abstract class RestConnector<T, U>
+    /// <typeparam name="TModel">Default type</typeparam>
+    /// <typeparam name="TRest">Rest data</typeparam>
+    public abstract class RestConnector<TModel, TRest>
     {
 
         /// <summary>
@@ -24,35 +26,39 @@ namespace IDevman.SAPConnector.Connector
         /// <summary>
         /// Download process handler
         /// </summary>
-        public ISyncDownload<T, U> SyncDownload { get; set; }
+        public ISyncDownload<TModel, TRest> SyncDownload { get; set; }
 
         /// <summary>
         /// Upload process handler
         /// </summary>
-        public ISyncUpload<T, U> SyncUpload { get; set; }
+        public ISyncUpload<TModel, TRest> SyncUpload { get; set; }
 
         /// <summary>
         /// Use last sync date to download the transfers from API to upload SAP also
         /// </summary>
-        /// <param name="connection">Database connection</param>
         /// <param name="lastSyncDate">Last download date</param>
         /// <returns>If was some data retrieved</returns>
-        public Fetched<U> Fetch(DBConnection connection, DateTime lastSyncDate)
+        public Fetched<TRest> Fetch(DateTime lastSyncDate)
         {
             if (SyncDownload == null)
             {
-                throw new Exception("'SyncDownload' property not defined");
+                throw new Exception(string.Format(CultureInfo.InvariantCulture, Properties.Resources.PropertyNotFound, "SyncDownload"));
             }
             logger.Debug("Fetching changes");
-            List<U> response = SyncDownload.Pull(lastSyncDate);
+            List<TRest> response = SyncDownload.Pull(lastSyncDate);
             if (response != null && response.Count > 0)
             {
                 logger.Info("Fetched " + response.Count + " records");
-                return new Fetched<U>
+                Fetched<TRest> fetched = new Fetched<TRest>();
+                if (SyncDownload.AllowNew)
                 {
-                    NewRecords = SyncDownload.AllowNew ? response.FindAll(x => SyncDownload.IsNew(x)) : null,
-                    ExistingRecords = SyncDownload.AllowUpdate ? response.FindAll(x => !SyncDownload.IsNew(x)) : null
-                };
+                    fetched.NewRecords.AddRange(response.FindAll(x => SyncDownload.IsNew(x)));
+                }
+                if (SyncDownload.AllowUpdate)
+                {
+                    fetched.ExistingRecords.AddRange(response.FindAll(x => !SyncDownload.IsNew(x)));
+                }
+                return fetched;
             }
             return null;
         }
@@ -61,20 +67,19 @@ namespace IDevman.SAPConnector.Connector
         /// Upload to warehouse system
         /// </summary>
         /// <param name="connection">Database connection</param>
-        /// <param name="lastSyncDate">Last synchronization date</param>
+        /// <param name="lastSyncTime">Last synchronization time (Unix time)</param>
         /// <param name="confirmDate">Confirming date</param>
-        public void Upload(DBConnection connection, DateTime lastSyncDate, DateTime confirmDate)
+        public void Upload(DBConnection connection, long lastSyncTime, DateTime confirmDate)
         {
             if (SyncUpload == null)
             {
-                throw new Exception("'SyncUpload' property not defined");
+                throw new Exception(string.Format(CultureInfo.InvariantCulture, Properties.Resources.PropertyNotFound, "SyncUpload"));
             }
             logger.Debug("Loading local changes");
-            List<T> records = SyncUpload.LoadLocal(connection, lastSyncDate);
+            List<TModel> records = SyncUpload.LoadLocal(connection, lastSyncTime);
             if (records != null && records.Count > 0)
             {
-                logger.Info("Found " + records.Count + " records since: "
-                        + lastSyncDate.ToString("dd/MM/yyyy HH:mm:ss"));
+                logger.Info("Found " + records.Count + " records since: " + lastSyncTime.AsUnixTimeString());
                 for (int i = 0; i < records.Count; i += SyncUpload.PageSize)
                 {
                     int size = records.Count - i;
@@ -97,11 +102,11 @@ namespace IDevman.SAPConnector.Connector
         /// <param name="connection">Database connection</param>
         /// <param name="fetched">Fetched data</param>
         /// <param name="nowDate">Current date sync date</param>
-        public void Storing(SAPConnection sap, DBConnection connection, Fetched<U> fetched, DateTime nowDate)
+        public void Storing(SAPConnection sap, DBConnection connection, Fetched<TRest> fetched, DateTime nowDate)
         {
             if (SyncDownload == null)
             {
-                throw new Exception("'SyncDownload' property not defined");
+                throw new Exception(string.Format(CultureInfo.InvariantCulture, Properties.Resources.PropertyNotFound, "SyncDownload"));
             }
             if (fetched != null)
             {
@@ -109,7 +114,7 @@ namespace IDevman.SAPConnector.Connector
                 bool hasChanges = false;
                 if (fetched.NewRecords != null && fetched.NewRecords.Count > 0)
                 {
-                    foreach (U i in fetched.NewRecords)
+                    foreach (TRest i in fetched.NewRecords)
                     {
                         SyncDownload.Create(connection, sap, i);
                     }
@@ -117,7 +122,7 @@ namespace IDevman.SAPConnector.Connector
                 }
                 if (fetched.ExistingRecords != null && fetched.ExistingRecords.Count > 0)
                 {
-                    foreach (U i in fetched.ExistingRecords)
+                    foreach (TRest i in fetched.ExistingRecords)
                     {
                         SyncDownload.Update(connection, sap, i);
                     }

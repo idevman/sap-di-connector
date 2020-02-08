@@ -4,6 +4,7 @@ using SAPbobsCOM;
 using System;
 using System.Reflection;
 using log4net;
+using System.Globalization;
 
 namespace IDevman.SAPConnector
 {
@@ -31,7 +32,8 @@ namespace IDevman.SAPConnector
         {
             if (SAPSettings.Current == null)
             {
-                SAPException exception = new SAPException(-1, "SAPSettings.Current not defined");
+                SAPException exception = new SAPException(-1,
+                    string.Format(CultureInfo.InvariantCulture, Properties.Resources.SettingsNotDefined, "SAPSettings.Current"));
                 logger.Error(exception.Message, exception);
                 Debug.WriteLine(exception.Message);
                 throw exception;
@@ -86,7 +88,8 @@ namespace IDevman.SAPConnector
         /// </summary>
         public void Dispose()
         {
-            Dispose(false);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>
@@ -101,7 +104,6 @@ namespace IDevman.SAPConnector
                 Debug.WriteLine("Disconnecting");
                 Company.Disconnect();
             }
-            GC.SuppressFinalize(this);
             GC.Collect();
             GC.WaitForPendingFinalizers();
             GC.Collect();

@@ -8,9 +8,9 @@ namespace IDevman.SAPConnector.Connector
     /// <summary>
     /// Provide method access to upload and sync data
     /// </summary>
-    /// <typeparam name="T">Default type</typeparam>
-    /// <typeparam name="U">Rest data</typeparam>
-    public interface ISyncUpload<T, U>
+    /// <typeparam name="TModel">Default type</typeparam>
+    /// <typeparam name="TRest">Rest data</typeparam>
+    public interface ISyncUpload<TModel, TRest>
     {
 
         /// <summary>
@@ -22,16 +22,16 @@ namespace IDevman.SAPConnector.Connector
         /// Load from database
         /// </summary>
         /// <param name="connection">Database connection</param>
-        /// <param name="lastSyncDate">Last sync date</param>
+        /// <param name="lastSyncTime">Last sync time (Unix time)</param>
         /// <returns></returns>
-        List<T> LoadLocal(DBConnection connection, DateTime lastSyncDate);
+        List<TModel> LoadLocal(DBConnection connection, long lastSyncTime);
 
         /// <summary>
         /// Push documents
         /// </summary>
         /// <param name="records">Documents to push</param>
         /// <returns></returns>
-        void Push(List<T> records);
+        void Push(List<TModel> records);
 
         /// <summary>
         /// Commit sync data

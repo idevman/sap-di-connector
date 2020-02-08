@@ -12,12 +12,12 @@ namespace IDevman.SAPConnector.Connector
         /// <summary>
         /// New records
         /// </summary>
-        public List<T> NewRecords { get; set; }
+        public List<T> NewRecords { get; } = new List<T>();
 
         /// <summary>
         /// Existing records
         /// </summary>
-        public List<T> ExistingRecords { get; set; }
+        public List<T> ExistingRecords { get; } = new List<T>();
 
         /// <summary>
         /// Define if fetched data is empty
@@ -26,8 +26,7 @@ namespace IDevman.SAPConnector.Connector
         {
             get
             {
-                return (NewRecords == null || NewRecords.Count == 0) &&
-                    (ExistingRecords == null || ExistingRecords.Count == 0);
+                return NewRecords.Count == 0 && ExistingRecords.Count == 0;
             }
         }
 
