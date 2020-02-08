@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sap-di-connector", "sap-di-connector\sap-di-connector.csproj", "{101C1F79-ED70-4AF3-AED6-66BAB98AC8FF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tests", "tests\tests.csproj", "{60BB7616-297B-4A83-A318-454E524231BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{101C1F79-ED70-4AF3-AED6-66BAB98AC8FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{101C1F79-ED70-4AF3-AED6-66BAB98AC8FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{101C1F79-ED70-4AF3-AED6-66BAB98AC8FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60BB7616-297B-4A83-A318-454E524231BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60BB7616-297B-4A83-A318-454E524231BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60BB7616-297B-4A83-A318-454E524231BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60BB7616-297B-4A83-A318-454E524231BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

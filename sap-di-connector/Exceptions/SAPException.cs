@@ -22,13 +22,50 @@ namespace IDevman.SAPConnector.Exceptions
         public string SAPErrorMessage { get; set; }
 
         /// <summary>
-        /// SAP exception
+        /// Create a new instance of SAP Exception
         /// </summary>
+        protected SAPException(): base()
+        {
+        }
+
+        /// <summary>
+        /// Create a new instance of SAP Exception
+        /// </summary>
+        /// <param name="message">Error message</param>
+        public SAPException(string message) : base(message)
+        {
+            SAPErrorMessage = message;
+        }
+
+        /// <summary>
+        /// Create a new instance of SAP Exception
+        /// </summary>
+        /// <param name="message">Error message</param>
+        /// <param name="innerException">Exception cause</param>
+        public SAPException(string message, Exception innerException) : base(message, innerException)
+        {
+            SAPErrorMessage = message;
+        }
+
+        /// <summary>
+        /// Create a new instance of SAP exception
+        /// </summary>
+        /// <param name="code">Error code to display</param>
         /// <param name="message">Error message</param>
         public SAPException(int code, string message) : base("[" + code + "]: " + message)
         {
             SAPErrorCode = code;
             SAPErrorMessage = message;
+        }
+
+        /// <summary>
+        /// Create a new instance of SAP exception
+        /// </summary>
+        /// <param name="info">Serialziation info</param>
+        /// <param name="context">Streaming context</param>
+        protected SAPException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+
         }
 
         /// <summary>
