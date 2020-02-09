@@ -26,11 +26,6 @@ namespace IDevman.SAPConnector.Data.Model
 		public string ManBtchNum { get; set; }
 
 		/// <summary>
-		/// Warehouse target code
-		/// </summary>
-		public string WhsCode { get; set; }
-
-		/// <summary>
 		/// Gets or sets Inventory item
 		/// </summary>
 		public string InvntItem { get; set; }
