@@ -76,7 +76,7 @@ namespace IDevman.SAPConnector.DBMS
         /// <returns>Data table loaded</returns>
         public DataTable CreateDataTable()
         {
-            DataTable dataTable = null;
+            DataTable dataTable = new DataTable();
             using (DataSet dataSet = new DataSet())
             using (SqlDataAdapter sqlAdapter = new SqlDataAdapter
             {
