@@ -64,6 +64,7 @@
     <Compile Include="Connector\RestConnector.cs" />
     <Compile Include="Connector\RestConnectorPool.cs" />
     <Compile Include="Data\Model\OCRD.cs" />
+    <Compile Include="Data\Model\OCRN.cs" />
     <Compile Include="Data\Model\OITM.cs" />
     <Compile Include="Data\Model\OPRQ.cs" />
     <Compile Include="Data\Model\ORDR.cs" />
