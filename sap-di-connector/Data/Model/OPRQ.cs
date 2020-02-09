@@ -46,7 +46,7 @@ namespace IDevman.SAPConnector.Data.Model
 		/// <summary>
 		/// Gets document date
 		/// </summary>
-		public DateTime TavDate { get; set; }
+		public DateTime TaxDate { get; set; }
 
 		/// <summary>
 		/// Gets required date
