@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -22,10 +23,9 @@ namespace IDevman.SAPConnector.Extensions
         /// <returns>Object list from data table</returns>
         public static List<T> ToList<T>(this DataTable table) where T : class, new()
         {
-            Thread.CurrentThread.CurrentCulture = CultureInfo.CurrentCulture;//.CreateSpecificCulture("es-MX");
+            List<T> list = new List<T>();
             try
             {
-                List<T> list = new List<T>();
                 foreach (var row in table.AsEnumerable())
                 {
                     T obj = new T();
@@ -36,22 +36,29 @@ namespace IDevman.SAPConnector.Extensions
                             try
                             {
                                 PropertyInfo propertyInfo = obj.GetType().GetProperty(prop.Name);
-                                propertyInfo.SetValue(obj, Convert.ChangeType(row[prop.Name], propertyInfo.PropertyType), null);
+                                propertyInfo.SetValue(obj,
+                                    Convert.ChangeType(row[prop.Name],propertyInfo.PropertyType, CultureInfo.InvariantCulture),
+                                    null);
                             }
-                            catch (Exception ex)
-                            {
-                                continue;
-                            }
+                            catch (ArgumentException ex) { Debug.Fail(ex.Message); continue; }
+                            catch (TargetException ex) { Debug.Fail(ex.Message); continue; }
+                            catch (TargetParameterCountException ex) { Debug.Fail(ex.Message); continue; }
+                            catch (MethodAccessException ex) { Debug.Fail(ex.Message); continue; }
+                            catch (TargetInvocationException ex) { Debug.Fail(ex.Message); continue; }
+                            catch (InvalidCastException ex) { Debug.Fail(ex.Message); continue; }
+                            catch (FormatException ex) { Debug.Fail(ex.Message); continue; }
+                            catch (OverflowException ex) { Debug.Fail(ex.Message); continue; }
+                            catch (AmbiguousMatchException ex) { Debug.Fail(ex.Message); continue; }
                         }
                     }
                     list.Add(obj);
                 }
-                return list;
             }
-            catch (Exception ex)
+            catch (ArgumentNullException ex)
             {
-                return null;
+                Debug.Fail(ex.Message);
             }
+            return list;
         }
 
     }

@@ -61,6 +61,15 @@ namespace IDevman.SAPConnector.Properties {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a &apos;{0}&apos; can not be null.
+        /// </summary>
+        internal static string NullValue {
+            get {
+                return ResourceManager.GetString("NullValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a &apos;{0}&apos; property not defined.
         /// </summary>
         internal static string PropertyNotFound {
