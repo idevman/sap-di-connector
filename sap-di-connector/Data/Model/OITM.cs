@@ -107,8 +107,7 @@ namespace IDevman.SAPConnector.Data.Model
 					EqualityComparer<string>.Default.Equals(ItemName, b.ItemName) &&
 					EqualityComparer<string>.Default.Equals(ManBtchNum, b.ManBtchNum) &&
 					EqualityComparer<string>.Default.Equals(PrchseItem, b.PrchseItem) &&
-					EqualityComparer<string>.Default.Equals(SellItem, b.SellItem) &&
-					EqualityComparer<string>.Default.Equals(WhsCode, b.WhsCode);
+					EqualityComparer<string>.Default.Equals(SellItem, b.SellItem);
 			}
 		}
 
@@ -122,7 +121,6 @@ namespace IDevman.SAPConnector.Data.Model
 			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ItemCode);
 			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ItemName);
 			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ManBtchNum);
-			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(WhsCode);
 			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(InvntItem);
 			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(SellItem);
 			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(PrchseItem);

@@ -96,7 +96,7 @@ namespace IDevman.SAPConnector.Data.Model
 			hashCode = hashCode * -1521134295 + DocNum.GetHashCode();
 			hashCode = hashCode * -1521134295 + DocDate.GetHashCode();
 			hashCode = hashCode * -1521134295 + DocDueDate.GetHashCode();
-			hashCode = hashCode * -1521134295 + TavDate.GetHashCode();
+			hashCode = hashCode * -1521134295 + TaxDate.GetHashCode();
 			hashCode = hashCode * -1521134295 + ReqDate.GetHashCode();
 			hashCode = hashCode * -1521134295 + EqualityComparer<List<PRQ1>>.Default.GetHashCode(Items);
 			return hashCode;
