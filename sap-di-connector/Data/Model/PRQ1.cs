@@ -54,6 +54,11 @@ namespace IDevman.SAPConnector.Data.Model
 		public decimal Quantity { get; set; }
 
 		/// <summary>
+		/// Gets or sets description
+		/// </summary>
+		public string Text { get; set; }
+
+		/// <summary>
 		/// Check object equality
 		/// </summary>
 		/// <param name="obj">To compare</param>
@@ -73,7 +78,8 @@ namespace IDevman.SAPConnector.Data.Model
 					EqualityComparer<string>.Default.Equals(ItemCode, b.ItemCode) &&
 					EqualityComparer<int>.Default.Equals(LineNum, b.LineNum) &&
 					EqualityComparer<char>.Default.Equals(LineStatus, b.LineStatus) &&
-					EqualityComparer<decimal>.Default.Equals(Quantity, b.Quantity);
+					EqualityComparer<decimal>.Default.Equals(Quantity, b.Quantity) &&
+					EqualityComparer<string>.Default.Equals(Text, b.Text);
 			}
 		}
 
