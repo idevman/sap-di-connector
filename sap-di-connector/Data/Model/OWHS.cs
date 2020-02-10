@@ -31,9 +31,9 @@ namespace IDevman.SAPConnector.Data.Model
 		/// Return if is active the warehouse
 		/// </summary>
 		/// <returns></returns>
-		public bool IsActive()
+		public bool IsActive
 		{
-			return "Y".Equals(Inactive, StringComparison.OrdinalIgnoreCase);
+			get => "Y".Equals(Inactive, StringComparison.OrdinalIgnoreCase);
 		}
 
 		/// <summary>
