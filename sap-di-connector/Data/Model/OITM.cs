@@ -43,7 +43,7 @@ namespace IDevman.SAPConnector.Data.Model
 		/// <summary>
 		/// Gets or sets frozen for
 		/// </summary>
-		public string frozenFor { get; set; }
+		public string FrozenFor { get; set; }
 
 		/// <summary>
 		/// Gets if the item is for inventory
@@ -74,7 +74,7 @@ namespace IDevman.SAPConnector.Data.Model
 		/// </summary>
 		public bool IsActive
 		{
-			get => "Y".Equals(frozenFor, StringComparison.OrdinalIgnoreCase);
+			get => "Y".Equals(FrozenFor, StringComparison.OrdinalIgnoreCase);
 		}
 
 		/// <summary>
@@ -101,7 +101,7 @@ namespace IDevman.SAPConnector.Data.Model
 			{
 				OITM b = (OITM)obj;
 				return
-					EqualityComparer<string>.Default.Equals(frozenFor, b.frozenFor) &&
+					EqualityComparer<string>.Default.Equals(FrozenFor, b.FrozenFor) &&
 					EqualityComparer<string>.Default.Equals(InvntItem, b.InvntItem) &&
 					EqualityComparer<string>.Default.Equals(ItemCode, b.ItemCode) &&
 					EqualityComparer<string>.Default.Equals(ItemName, b.ItemName) &&
@@ -124,7 +124,7 @@ namespace IDevman.SAPConnector.Data.Model
 			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(InvntItem);
 			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(SellItem);
 			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(PrchseItem);
-			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(frozenFor);
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(FrozenFor);
 			hashCode = hashCode * -1521134295 + IsInventoryItem.GetHashCode();
 			hashCode = hashCode * -1521134295 + IsSellItem.GetHashCode();
 			hashCode = hashCode * -1521134295 + IsPurchaseItem.GetHashCode();
