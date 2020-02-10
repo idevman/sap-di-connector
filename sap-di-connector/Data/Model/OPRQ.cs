@@ -12,6 +12,16 @@ namespace IDevman.SAPConnector.Data.Model
 	{
 
 		/// <summary>
+		/// Gets document entry
+		/// </summary>
+		public int DocEntry { get; set; }
+
+		/// <summary>
+		/// Gets document number
+		/// </summary>
+		public int DocNum { get; set; }
+
+		/// <summary>
 		/// Gets user name
 		/// </summary>
 		public string ReqName { get; set; }
@@ -22,16 +32,6 @@ namespace IDevman.SAPConnector.Data.Model
 		/// 171 -> Employee
 		/// </summary>
 		public int ReqType { get; set; }
-
-		/// <summary>
-		/// Gets document entry
-		/// </summary>
-		public int DocEntry { get; set; }
-
-		/// <summary>
-		/// Gets document number
-		/// </summary>
-		public int DocNum { get; set; }
 
 		/// <summary>
 		/// Gets posting date

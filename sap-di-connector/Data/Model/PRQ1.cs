@@ -51,7 +51,7 @@ namespace IDevman.SAPConnector.Data.Model
 		/// <summary>
 		/// Item quantity
 		/// </summary>
-		public double Quantity { get; set; }
+		public decimal Quantity { get; set; }
 
 		/// <summary>
 		/// Check object equality
@@ -73,7 +73,7 @@ namespace IDevman.SAPConnector.Data.Model
 					EqualityComparer<string>.Default.Equals(ItemCode, b.ItemCode) &&
 					EqualityComparer<int>.Default.Equals(LineNum, b.LineNum) &&
 					EqualityComparer<char>.Default.Equals(LineStatus, b.LineStatus) &&
-					EqualityComparer<double>.Default.Equals(Quantity, b.Quantity);
+					EqualityComparer<decimal>.Default.Equals(Quantity, b.Quantity);
 			}
 		}
 

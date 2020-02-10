@@ -14,6 +14,11 @@ namespace IDevman.SAPConnector.Data.Model
 	{
 
 		/// <summary>
+		/// Gets or sets employee id
+		/// </summary>
+		public int EmpId { get; set; }
+
+		/// <summary>
 		/// Gets or sets employee first name
 		/// </summary>
 		public string FirstName { get; set; }
@@ -68,6 +73,7 @@ namespace IDevman.SAPConnector.Data.Model
 			{
 				OHEM b = (OHEM)obj;
 				return
+					EqualityComparer<int>.Default.Equals(EmpId, b.EmpId) &&
 					EqualityComparer<string>.Default.Equals(FirstName, b.FirstName) &&
 					EqualityComparer<string>.Default.Equals(MiddleName, b.MiddleName) &&
 					EqualityComparer<string>.Default.Equals(LastName, b.LastName) &&
