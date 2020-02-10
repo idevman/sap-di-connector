@@ -101,5 +101,6 @@ namespace IDevman.SAPConnector.Data.Model
 			hashCode = hashCode * -1521134295 + EqualityComparer<List<PRQ1>>.Default.GetHashCode(Items);
 			return hashCode;
 		}
+
 	}
 }

@@ -66,10 +66,10 @@ namespace IDevman.SAPConnector.Connector
         /// <param name="commitTime">Commiting time (Unix time)</param>
         public void Upload(DBConnection db, long lastSyncTime, long commitTime)
         {
-            if (this is ISyncUpload<TRest> uploader)
+            if (this is ISyncUpload<TModel, TRest> uploader)
             {
                 logger.Debug("Loading local changes");
-                List<TRest> records = uploader.LoadLocal(db, lastSyncTime.AsUnixTime());
+                List<TModel> records = uploader.LoadLocal(db, lastSyncTime.AsUnixTime());
                 if (records != null && records.Count > 0)
                 {
                     logger.Info("Found " + records.Count + " records since: " + lastSyncTime.AsUnixTimeString());

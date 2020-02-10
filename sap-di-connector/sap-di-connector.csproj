@@ -62,9 +62,12 @@
     <Compile Include="Connector\RestConnectorPool.cs" />
     <Compile Include="Data\Model\OCRD.cs" />
     <Compile Include="Data\Model\OCRN.cs" />
+    <Compile Include="Data\Model\OHEM.cs" />
+    <Compile Include="Data\Model\OHPS.cs" />
     <Compile Include="Data\Model\OITM.cs" />
     <Compile Include="Data\Model\OPRQ.cs" />
     <Compile Include="Data\Model\ORDR.cs" />
+    <Compile Include="Data\Model\OUDP.cs" />
     <Compile Include="Data\Model\OWHS.cs" />
     <Compile Include="Data\Model\PRQ1.cs" />
     <Compile Include="Data\Model\RDR1.cs" />

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 
 namespace IDevman.SAPConnector.Extensions
 {
@@ -20,8 +19,7 @@ namespace IDevman.SAPConnector.Extensions
         {
             if (list == null)
             {
-                throw new ArgumentNullException(nameof(list),
-                    string.Format(CultureInfo.InvariantCulture, Properties.Resources.NullValue, nameof(list)));
+                throw new ArgumentNullException("list", "the list can not be null");
             }
             return list.Count == 0 ? null : list.First();
         }
