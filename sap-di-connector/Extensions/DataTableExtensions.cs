@@ -36,9 +36,13 @@ namespace IDevman.SAPConnector.Extensions
                             try
                             {
                                 PropertyInfo propertyInfo = obj.GetType().GetProperty(prop.Name);
-                                propertyInfo.SetValue(obj,
-                                    Convert.ChangeType(row[prop.Name], propertyInfo.PropertyType, CultureInfo.InvariantCulture),
-                                    null);
+                                var value = row[prop.Name];
+                                if (!(value is DBNull))
+                                {
+                                    propertyInfo.SetValue(obj,
+                                        Convert.ChangeType(row[prop.Name], propertyInfo.PropertyType, CultureInfo.InvariantCulture),
+                                        null);
+                                }
                             }
                             catch (ArgumentException ex) { Debug.Fail(ex.Message); continue; }
                             catch (TargetException ex) { Debug.Fail(ex.Message); continue; }
