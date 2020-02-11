@@ -56,6 +56,21 @@ namespace IDevman.SAPConnector.Data.Model
 		public int Manager { get; set; }
 
 		/// <summary>
+		/// Gets or sets employee active
+		/// Y active
+		/// N No active
+		/// </summary>
+		public string Active { get; set; }
+
+		/// <summary>
+		/// Gets if the employee is Active
+		/// </summary>
+		public bool IsActive
+		{
+			get => "Y".Equals(Active, StringComparison.OrdinalIgnoreCase);
+		}
+
+		/// <summary>
 		/// Check object equality
 		/// </summary>
 		/// <param name="obj">To compare</param>
@@ -78,7 +93,8 @@ namespace IDevman.SAPConnector.Data.Model
 					EqualityComparer<string>.Default.Equals(Email, b.Email) &&
 					EqualityComparer<int>.Default.Equals(Position, b.Position) &&
 					EqualityComparer<int>.Default.Equals(Dept, b.Dept) &&
-					EqualityComparer<int>.Default.Equals(Manager, b.Manager);
+					EqualityComparer<int>.Default.Equals(Manager, b.Manager) &&
+					EqualityComparer<string>.Default.Equals(Active, b.Active);
 			}
 		}
 
@@ -94,6 +110,7 @@ namespace IDevman.SAPConnector.Data.Model
 			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(LastName);
 			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ExtEmpNo);
 			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Email);
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Active);
 			hashCode = hashCode * -1521134295 + Position.GetHashCode();
 			hashCode = hashCode * -1521134295 + Dept.GetHashCode();
 			hashCode = hashCode * -1521134295 + Manager.GetHashCode();
