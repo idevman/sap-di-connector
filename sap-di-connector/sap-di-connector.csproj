@@ -60,6 +60,7 @@
     <Compile Include="Connector\IUpload.cs" />
     <Compile Include="Connector\RestConnector.cs" />
     <Compile Include="Connector\RestConnectorPool.cs" />
+    <Compile Include="Data\Model\ITM12.cs" />
     <Compile Include="Data\Model\OCRD.cs" />
     <Compile Include="Data\Model\OCRN.cs" />
     <Compile Include="Data\Model\OHEM.cs" />

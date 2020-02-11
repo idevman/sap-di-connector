@@ -9,7 +9,6 @@ namespace IDevman.SAPConnector.Data.Model
 	/// </summary>
 	public class OITM
 	{
-		private List<OUOM> ouoms;
 
 		/// <summary>
 		/// Item code
