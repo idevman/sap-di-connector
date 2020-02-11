@@ -55,5 +55,16 @@ namespace IDevman.SAPConnector.Data.Model
 			return hashCode;
 		}
 
+		/// <summary>
+		/// create a uom
+		/// </summary>
+		/// <returns></returns>
+		public OUOM ToUom()
+		{
+			return new OUOM
+			{
+				UomEntry = UomEntry
+			};
+		}
 	}
 }

@@ -12,7 +12,7 @@ namespace Tests.Connectors
     /// <summary>
     /// Create a mock for a warehouse connector
     /// </summary>
-    public class WarehouseConnector : RestConnector<OWHS, WarehouseRest>, ISyncUpload<OWHS, WarehouseRest>
+    public class WarehouseConnector : RestConnector<OWHS, WarehouseRest>, ISyncUpload<OWHS>
     {
         public int PageSize { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
