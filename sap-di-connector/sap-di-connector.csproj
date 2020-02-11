@@ -69,6 +69,7 @@
     <Compile Include="Data\Model\OPRQ.cs" />
     <Compile Include="Data\Model\ORDR.cs" />
     <Compile Include="Data\Model\OUDP.cs" />
+    <Compile Include="Data\Model\OUOM.cs" />
     <Compile Include="Data\Model\OWHS.cs" />
     <Compile Include="Data\Model\PRQ1.cs" />
     <Compile Include="Data\Model\RDR1.cs" />

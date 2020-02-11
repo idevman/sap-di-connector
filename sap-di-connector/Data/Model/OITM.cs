@@ -9,6 +9,7 @@ namespace IDevman.SAPConnector.Data.Model
 	/// </summary>
 	public class OITM
 	{
+		private List<OUOM> ouoms;
 
 		/// <summary>
 		/// Item code
@@ -90,6 +91,11 @@ namespace IDevman.SAPConnector.Data.Model
 		{
 			get => "Y".Equals(ManBtchNum, StringComparison.OrdinalIgnoreCase);
 		}
+
+		/// <summary>
+		/// Gets or sets uoms
+		/// </summary>
+		public List<OUOM> Ouoms { get; }
 
 		/// <summary>
 		/// Check object equality
