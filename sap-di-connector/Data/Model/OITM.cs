@@ -51,6 +51,11 @@ namespace IDevman.SAPConnector.Data.Model
 		public int ItmsGrpCod { get; set; }
 
 		/// <summary>
+		/// Gets or sets purchase uom entry
+		/// </summary>
+		public int PUoMEntry { get; set; }
+
+		/// <summary>
 		/// Gets if the item is for inventory
 		/// </summary>
 		public bool IsInventoryItem
