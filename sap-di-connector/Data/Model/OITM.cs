@@ -94,7 +94,7 @@ namespace IDevman.SAPConnector.Data.Model
 		/// <summary>
 		/// Gets or sets uoms
 		/// </summary>
-		public List<OUOM> Ouoms { get; }
+		public List<OUOM> Ouoms { get; } = new List<OUOM>();
 
 		/// <summary>
 		/// Check object equality
