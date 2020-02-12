@@ -79,7 +79,7 @@ namespace IDevman.SAPConnector.Data.Model
 		/// </summary>
 		public bool IsActive
 		{
-			get => "Y".Equals(FrozenFor, StringComparison.OrdinalIgnoreCase);
+			get => "N".Equals(FrozenFor, StringComparison.OrdinalIgnoreCase);
 		}
 
 		/// <summary>
