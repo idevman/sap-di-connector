@@ -51,6 +51,11 @@ namespace IDevman.SAPConnector.Data.Model
 		public decimal Quantity { get; set; }
 
 		/// <summary>
+		/// Uom code 
+		/// </summary>
+		public int UomEntry { get; set; }
+
+		/// <summary>
 		/// Gets or sets description
 		/// </summary>
 		public string Text { get; set; }
