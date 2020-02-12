@@ -18,7 +18,7 @@ namespace IDevman.SAPConnector.Data.Model
 		/// <summary>
 		/// Gets or sets group name
 		/// </summary>
-		public string ItmsGrpName { get; set; }
+		public string ItmsGrpNam { get; set; }
 
         /// <summary>
         /// Check object equality
@@ -36,7 +36,7 @@ namespace IDevman.SAPConnector.Data.Model
                 OITB b = (OITB)obj;
                 return
                     EqualityComparer<int>.Default.Equals(ItmsGrpCod, b.ItmsGrpCod) &&
-                    EqualityComparer<string>.Default.Equals(ItmsGrpName, b.ItmsGrpName);
+                    EqualityComparer<string>.Default.Equals(ItmsGrpNam, b.ItmsGrpNam);
             }
         }
 
@@ -48,7 +48,7 @@ namespace IDevman.SAPConnector.Data.Model
         {
             var hashCode = -1078589205;
             hashCode = hashCode * -1521134295 + ItmsGrpCod.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ItmsGrpName);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(ItmsGrpNam);
             return hashCode;
         }
     }
