@@ -1,5 +1,4 @@
 ﻿using IDevman.SAPConnector.DBMS;
-using System;
 using System.Collections.Generic;
 
 namespace IDevman.SAPConnector.Connector
@@ -8,9 +7,8 @@ namespace IDevman.SAPConnector.Connector
     /// <summary>
     /// Provide method access to download and sync data
     /// </summary>
-    /// <typeparam name="TModel">Default type</typeparam>
     /// <typeparam name="TRest">Rest data</typeparam>
-    public interface ISyncDownload<TModel, TRest> : IDownload
+    public interface ISyncDownload<TRest> : IDownload
     {
 
         /// <summary>
@@ -51,7 +49,7 @@ namespace IDevman.SAPConnector.Connector
         /// <param name="sap">Sap connection</param>
         /// <param name="record">Record to create</param>
         /// <returns></returns>
-        TModel Create(DBConnection db, SAPConnection sap, TRest record);
+        TRest Create(DBConnection db, SAPConnection sap, TRest record);
 
         /// <summary>
         /// Update record to sate
@@ -60,7 +58,7 @@ namespace IDevman.SAPConnector.Connector
         /// <param name="sap">Sap connection</param>
         /// <param name="document">Document to create</param>
         /// <returns></returns>
-        TModel Update(DBConnection db, SAPConnection sap, TRest document);
+        TRest Update(DBConnection db, SAPConnection sap, TRest document);
 
     }
 

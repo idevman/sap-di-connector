@@ -10,9 +10,8 @@ namespace IDevman.SAPConnector.Connector
     /// <summary>
     /// Data connector class
     /// </summary>
-    /// <typeparam name="TModel">Default type</typeparam>
     /// <typeparam name="TRest">Rest data</typeparam>
-    public abstract class RestConnector<TModel, TRest> : IRestConnector
+    public abstract class RestConnector<TRest> : IRestConnector
     {
 
         /// <summary>
@@ -39,7 +38,7 @@ namespace IDevman.SAPConnector.Connector
         public void Download(long lastSyncTime)
         {
             DataFetched = new DataFetched<TRest>();
-            if (this is ISyncDownload<TModel, TRest> downloader)
+            if (this is ISyncDownload<TRest> downloader)
             {
                 logger.Debug("Fetching changes");
                 List<TRest> response = downloader.Pull(lastSyncTime);
@@ -97,29 +96,40 @@ namespace IDevman.SAPConnector.Connector
         /// <param name="commitTime">Commit time (Unix time)</param>
         public void SapStore(SAPConnection sap, DBConnection db, long commitTime)
         {
-            if (!DataFetched.Empty && this is ISyncDownload<TModel, TRest> downloader)
+            if (!DataFetched.Empty && this is ISyncDownload<TRest> downloader)
             {
                 logger.Debug("Storing data");
-                bool hasChanges = false;
+                List<TRest> changed = new List<TRest>();
                 if (DataFetched.NewRecords.Count > 0)
                 {
                     foreach (TRest i in DataFetched.NewRecords)
                     {
-                        downloader.Create(db, sap, i);
+                        TRest model = downloader.Create(db, sap, i);
+                        if (model != null)
+                        {
+                            changed.Add(model);
+                        }
                     }
-                    hasChanges = true;
                 }
                 if (DataFetched.ExistingRecords.Count > 0)
                 {
                     foreach (TRest i in DataFetched.ExistingRecords)
                     {
-                        downloader.Update(db, sap, i);
+                        TRest model = downloader.Update(db, sap, i);
+                        if (model != null)
+                        {
+                            changed.Add(model);
+                        }
                     }
-                    hasChanges = true;
                 }
-                if (hasChanges)
+                if (changed.Count > 0)
                 {
                     downloader.CommitFetch(commitTime);
+                    if (this is ISyncUpload<TRest> uploader)
+                    {
+                        logger.Info("Updating changes");
+                        uploader.Push(changed);
+                    }
                 }
             }
         }
