@@ -54,6 +54,11 @@ namespace IDevman.SAPConnector.Data.Model
 		public DateTime ReqDate { get; set; }
 
 		/// <summary>
+		/// Gets purchase comments
+		/// </summary>
+		public string Comments { get; set; }
+
+		/// <summary>
 		/// Purchase order items related
 		/// </summary>
 		public List<PRQ1> Items { get; } = new List<PRQ1>();
