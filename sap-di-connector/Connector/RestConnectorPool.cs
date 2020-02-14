@@ -20,7 +20,7 @@ namespace IDevman.SAPConnector.Connector
         /// </summary>
         /// <param name="lastSyncTime"></param>
         /// <param name="commitTime"></param>
-        public void Sync(long lastSyncTime, long commitTime)
+        public virtual void Sync(long lastSyncTime, long commitTime)
         {
             if (Connectors.Count > 0)
             {
