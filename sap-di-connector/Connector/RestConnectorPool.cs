@@ -13,45 +13,56 @@ namespace IDevman.SAPConnector.Connector
         /// <summary>
         /// Connectors to execute for sincronization
         /// </summary>
-        public List<IRestConnector> Connectors { get; } = new List<IRestConnector>();
+        public Dictionary<string, IRestConnector> Connectors { get; } = new Dictionary<string, IRestConnector>();
 
         /// <summary>
         /// Synchornize all connectors
         /// </summary>
-        /// <param name="lastSyncTime"></param>
-        /// <param name="commitTime"></param>
-        public virtual void Sync(long lastSyncTime, long commitTime)
+        /// <param name="lastDownload">Last downloads times</param>
+        /// <param name="lastUpload">Last upload times</param>
+        /// <param name="commitTime">Commit times</param>
+        public virtual void Sync(Dictionary<string, long> lastDownload, Dictionary<string, long> lastUpload, long commitTime)
         {
-            if (Connectors.Count > 0)
+            if (Connectors.Count > 0 && lastDownload != null && lastUpload != null)
             {
                 // Creating database connection
                 using (DBConnection db = new DBConnection())
                 {
                     bool fetched = false;
-                    foreach (IRestConnector connector in Connectors)
+                    foreach (KeyValuePair<string, IRestConnector> connector in Connectors)
                     {
                         // Upload to API
-                        if (connector is IUpload upload)
+                        if (connector.Value is IUpload upload)
                         {
-                            upload.Upload(db, lastSyncTime, commitTime);
+                            long last = 0;
+                            if (lastUpload.ContainsKey(connector.Key))
+                            {
+                                last = lastUpload[connector.Key];
+                            }
+                            upload.Upload(db, last, commitTime);
                         }
                         // Download from API
-                        if (connector is IDownload download)
+                        if (connector.Value is IDownload download)
                         {
-                            download.Download(lastSyncTime);
+                            long last = 0;
+                            if (lastDownload.ContainsKey(connector.Key))
+                            {
+                                last = lastDownload[connector.Key];
+                            }
+                            download.Download(last);
                         }
-                        fetched |= connector.Fetched;
+                        fetched |= connector.Value.Fetched;
                     }
                     // Store in SAP (Openning SAP is highly cost, so open just when required)
                     if (fetched)
                     {
                         using (SAPConnection sap = new SAPConnection())
                         {
-                            foreach (IRestConnector connector in Connectors)
+                            foreach (KeyValuePair<string, IRestConnector> connector in Connectors)
                             {
-                                if (connector.Fetched)
+                                if (connector.Value.Fetched)
                                 {
-                                    connector.SapStore(sap, db, commitTime);
+                                    connector.Value.SapStore(sap, db, commitTime);
                                 }
                             }
                         }
