@@ -61,6 +61,16 @@ namespace IDevman.SAPConnector.Data.Model
 		public string Text { get; set; }
 
 		/// <summary>
+		/// Gets or sets base entry
+		/// </summary>
+		public int BaseEntry { get; set; }
+
+		/// <summary>
+		/// Gets or sets base type
+		/// </summary>
+		public int BaseType { get; set; }
+
+		/// <summary>
 		/// Check object equality
 		/// </summary>
 		/// <param name="obj">To compare</param>

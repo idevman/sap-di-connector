@@ -64,6 +64,25 @@ namespace IDevman.SAPConnector.Data.Model
 		public List<PRQ1> Items { get; } = new List<PRQ1>();
 
 		/// <summary>
+		/// Gets purchase date created
+		/// </summary>
+		public DateTime PurchaseDate { get; set; }
+
+		/// <summary>
+		/// Gets purchase closed date
+		/// </summary>
+		public DateTime ClosePurchaseDate { get; set; }
+
+		/// <summary>
+		/// Gets if has quotation
+		/// </summary>
+		/// <returns></returns>
+		public bool HasQuotation()
+		{
+			return Items.Where(x => x.BaseType == 17).Any();
+		}
+
+		/// <summary>
 		/// Check object equality
 		/// </summary>
 		/// <param name="obj">To compare</param>
