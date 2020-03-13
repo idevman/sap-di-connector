@@ -8,6 +8,8 @@ using System.Globalization;
 using System.Reflection;
 using System.Text;
 using System.Threading;
+using Sap.Data.Hana;
+using System.Data.Common;
 
 namespace IDevman.SAPConnector.DBMS
 {
@@ -26,12 +28,12 @@ namespace IDevman.SAPConnector.DBMS
         /// <summary>
         /// SQL connection to handle in persistence unit
         /// </summary>
-        private SqlConnection SQLConnection { get; set; }
+        private DbConnection SQLConnection { get; set; }
 
         /// <summary>
         /// SQL command to execute
         /// </summary>
-        public SqlCommand SQLCommand { get; set; }
+        public DbCommand SQLCommand { get; set; }
 
         /// <summary>
         /// Create a new instance of Persistence
@@ -48,26 +50,57 @@ namespace IDevman.SAPConnector.DBMS
             }
             Thread.CurrentThread.CurrentCulture = CultureInfo.CurrentCulture;//.CreateSpecificCulture("es-MX");
             StringBuilder connectionStringBuilder = new StringBuilder();
-            connectionStringBuilder.Append("Server=").Append(SAPSettings.Current.Server).Append(";");
-            connectionStringBuilder.Append("Database=").Append(SAPSettings.Current.CompanyDB).Append(";");
-            if (SAPSettings.Current.UseTrusted)
+            if (SAPSettings.Current.DbServerType == SAPbobsCOM.BoDataServerTypes.dst_HANADB)
             {
-                connectionStringBuilder.Append("Trusted_Connection=True");
+                connectionStringBuilder.Append("Server=").Append(SAPSettings.Current.Server).Append(";");
+                connectionStringBuilder.Append("UserId=").Append(SAPSettings.Current.DbUserName).Append(";");
+                connectionStringBuilder.Append("Password=").Append(SAPSettings.Current.DbPassword).Append(";");
+                SQLConnection = new HanaConnection
+                {
+                    ConnectionString = connectionStringBuilder.ToString()
+                };
             }
             else
             {
-                connectionStringBuilder.Append("User Id=").Append(SAPSettings.Current.DbUserName).Append(";");
-                connectionStringBuilder.Append("Password=").Append(SAPSettings.Current.DbPassword).Append(";");
+                connectionStringBuilder.Append("Server=").Append(SAPSettings.Current.Server).Append(";");
+                connectionStringBuilder.Append("Database=").Append(SAPSettings.Current.CompanyDB).Append(";");
+                if (SAPSettings.Current.UseTrusted)
+                {
+                    connectionStringBuilder.Append("Trusted_Connection=True");
+                }
+                else
+                {
+                    connectionStringBuilder.Append("User Id=").Append(SAPSettings.Current.DbUserName).Append(";");
+                    connectionStringBuilder.Append("Password=").Append(SAPSettings.Current.DbPassword).Append(";");
+                }
+                SQLConnection = new SqlConnection
+                {
+                    ConnectionString = connectionStringBuilder.ToString()
+                };
             }
-            SQLConnection = new SqlConnection
-            {
-                ConnectionString = connectionStringBuilder.ToString()
-            };
-            SQLCommand = new SqlCommand
-            {
-                Connection = SQLConnection
-            };
+            CleanCommands();
             SQLConnection.Open();
+        }
+
+        /// <summary>
+        /// Update and initialize components
+        /// </summary>
+        private void CleanCommands()
+        {
+            if (SAPSettings.Current.DbServerType == SAPbobsCOM.BoDataServerTypes.dst_HANADB)
+            {
+                SQLCommand = new HanaCommand
+                {
+                    Connection = (HanaConnection)SQLConnection
+                };
+            }
+            else
+            {
+                SQLCommand = new SqlCommand
+                {
+                    Connection = (SqlConnection)SQLConnection
+                };
+            }
         }
 
         /// <summary>
@@ -78,10 +111,16 @@ namespace IDevman.SAPConnector.DBMS
         {
             DataTable dataTable = new DataTable();
             using (DataSet dataSet = new DataSet())
-            using (SqlDataAdapter sqlAdapter = new SqlDataAdapter
-            {
-                SelectCommand = SQLCommand
-            })
+            using (DbDataAdapter sqlAdapter =
+                    SAPSettings.Current.DbServerType == SAPbobsCOM.BoDataServerTypes.dst_HANADB ?
+                    ((DbDataAdapter) new HanaDataAdapter()
+                    {
+                        SelectCommand = (HanaCommand)SQLCommand
+                    })
+                    : ((DbDataAdapter) new SqlDataAdapter()
+                    {
+                        SelectCommand = (SqlCommand)SQLCommand
+                    }))
             {
                 sqlAdapter.Fill(dataSet);
                 if (dataSet.Tables.Count > 0)
@@ -89,10 +128,7 @@ namespace IDevman.SAPConnector.DBMS
                     dataTable = dataSet.Tables[0];
                 }
             }
-            SQLCommand = new SqlCommand
-            {
-                Connection = SQLCommand.Connection
-            };
+            CleanCommands();
             return dataTable;
         }
 
