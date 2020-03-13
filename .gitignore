@@ -9,3 +9,5 @@
 /sap-di-connector/*.nupkg
 /tests/obj/Debug
 /tests/bin/Debug
+/sap-di-connector/bin/Release
+/sap-di-connector/obj/Release

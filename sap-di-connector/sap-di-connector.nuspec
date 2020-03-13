@@ -11,11 +11,5 @@
     <description>$description$</description>
     <releaseNotes>Allow connect to SAP.</releaseNotes>
     <copyright>Copyright 2020</copyright>
-	<references>
-      <reference file="Sap.Data.Hana.v4.5.dll" />
-    </references>
   </metadata>
-  <files>
-    <file src="..\libs\Sap.Data.Hana.v4.5.dll" target="lib"/>
-  </files>
 </package>

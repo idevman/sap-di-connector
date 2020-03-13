@@ -36,6 +36,28 @@ namespace IDevman.SAPConnector.DBMS
         public DbCommand SQLCommand { get; set; }
 
         /// <summary>
+        /// Retrieve command as SQL command
+        /// </summary>
+        public SqlCommand AsSqlCommand
+        {
+            get
+            {
+                return (SqlCommand)SQLCommand;
+            }
+        }
+
+        /// <summary>
+        /// Retrieve connection as hanna command
+        /// </summary>
+        public HanaCommand AsHanaCommand
+        {
+            get
+            {
+                return (HanaCommand)SQLCommand;
+            }
+        }
+
+        /// <summary>
         /// Create a new instance of Persistence
         /// </summary>
         public DBConnection()
@@ -55,6 +77,7 @@ namespace IDevman.SAPConnector.DBMS
                 connectionStringBuilder.Append("Server=").Append(SAPSettings.Current.Server).Append(";");
                 connectionStringBuilder.Append("UserId=").Append(SAPSettings.Current.DbUserName).Append(";");
                 connectionStringBuilder.Append("Password=").Append(SAPSettings.Current.DbPassword).Append(";");
+                connectionStringBuilder.Append("databaseName=").Append(SAPSettings.Current.CompanyDB).Append(";");
                 SQLConnection = new HanaConnection
                 {
                     ConnectionString = connectionStringBuilder.ToString()
@@ -115,11 +138,11 @@ namespace IDevman.SAPConnector.DBMS
                     SAPSettings.Current.DbServerType == SAPbobsCOM.BoDataServerTypes.dst_HANADB ?
                     ((DbDataAdapter) new HanaDataAdapter()
                     {
-                        SelectCommand = (HanaCommand)SQLCommand
+                        SelectCommand = AsHanaCommand
                     })
                     : ((DbDataAdapter) new SqlDataAdapter()
                     {
-                        SelectCommand = (SqlCommand)SQLCommand
+                        SelectCommand = AsSqlCommand
                     }))
             {
                 sqlAdapter.Fill(dataSet);
