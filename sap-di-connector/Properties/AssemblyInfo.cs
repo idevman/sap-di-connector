@@ -6,13 +6,13 @@ using System.Runtime.InteropServices;
 // La información general de un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos valores de atributo para modificar la información
 // asociada con un ensamblado.
-[assembly: AssemblyTitle("SAPConnector")]
-[assembly: AssemblyDescription("Allow SAP connection")]
+[assembly: AssemblyTitle("SAP DI Connector")]
+[assembly: AssemblyDescription("Provide utillities for SAP sincronization via SQL and DI")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SAPConnector")]
+[assembly: AssemblyCompany("Silifalcon")]
+[assembly: AssemblyProduct("SAP DI Connector")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("Silifalcon")]
 [assembly: AssemblyCulture("")]
 
 // Si establece ComVisible en false, los tipos de este ensamblado no estarán visibles 
