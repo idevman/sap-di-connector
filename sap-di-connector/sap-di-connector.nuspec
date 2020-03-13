@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <description>$description$</description>
+    <releaseNotes>Allow connect to SAP.</releaseNotes>
+    <copyright>Copyright 2020</copyright>
+	<references>
+      <reference file="Sap.Data.Hana.v4.5.dll" />
+    </references>
+  </metadata>
+  <files>
+    <file src="..\libs\Sap.Data.Hana.v4.5.dll" target="lib"/>
+  </files>
+</package>

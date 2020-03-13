@@ -9,10 +9,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("SAP DI Connector")]
 [assembly: AssemblyDescription("Provide utillities for SAP sincronization via SQL and DI")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Silifalcon")]
+[assembly: AssemblyCompany("IDevman")]
 [assembly: AssemblyProduct("SAP DI Connector")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
-[assembly: AssemblyTrademark("Silifalcon")]
+[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Si establece ComVisible en false, los tipos de este ensamblado no estarán visibles 
@@ -33,6 +33,6 @@ using System.Runtime.InteropServices;
 // Puede especificar todos los valores o usar los valores predeterminados de número de compilación y de revisión
 // utilizando el carácter "*", como se muestra a continuación:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.0.1.0")]
+[assembly: AssemblyFileVersion("1.0.1.0")]
 [assembly: NeutralResourcesLanguage("en")]

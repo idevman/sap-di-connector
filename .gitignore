@@ -6,5 +6,6 @@
 /packages
 /sap-di-connector/obj/Debug
 /sap-di-connector/bin/Debug
+/sap-di-connector/*.nupkg
 /tests/obj/Debug
 /tests/bin/Debug
