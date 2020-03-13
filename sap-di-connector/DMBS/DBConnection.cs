@@ -77,7 +77,7 @@ namespace IDevman.SAPConnector.DBMS
                 connectionStringBuilder.Append("Server=").Append(SAPSettings.Current.Server).Append(";");
                 connectionStringBuilder.Append("UserId=").Append(SAPSettings.Current.DbUserName).Append(";");
                 connectionStringBuilder.Append("Password=").Append(SAPSettings.Current.DbPassword).Append(";");
-                connectionStringBuilder.Append("databaseName=").Append(SAPSettings.Current.CompanyDB).Append(";");
+                // connectionStringBuilder.Append("databaseName=").Append(SAPSettings.Current.CompanyDB).Append(";");
                 SQLConnection = new HanaConnection
                 {
                     ConnectionString = connectionStringBuilder.ToString()
