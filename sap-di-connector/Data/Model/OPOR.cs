@@ -49,5 +49,31 @@ namespace IDevman.SAPConnector.Data.Model
 		/// </summary>
 		public int PurchaseRequestId { get; set; }
 
+		public override bool Equals(object obj)
+		{
+			return obj is OPOR oPOR &&
+				   DocEntry == oPOR.DocEntry &&
+				   DocNum == oPOR.DocNum &&
+				   DocDate == oPOR.DocDate &&
+				   DocDueDate == oPOR.DocDueDate &&
+				   TaxDate == oPOR.TaxDate &&
+				   DocStatus == oPOR.DocStatus &&
+				   UpdateDate == oPOR.UpdateDate &&
+				   PurchaseRequestId == oPOR.PurchaseRequestId;
+		}
+
+		public override int GetHashCode()
+		{
+			int hashCode = 1540013303;
+			hashCode = hashCode * -1521134295 + DocEntry.GetHashCode();
+			hashCode = hashCode * -1521134295 + DocNum.GetHashCode();
+			hashCode = hashCode * -1521134295 + DocDate.GetHashCode();
+			hashCode = hashCode * -1521134295 + DocDueDate.GetHashCode();
+			hashCode = hashCode * -1521134295 + TaxDate.GetHashCode();
+			hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(DocStatus);
+			hashCode = hashCode * -1521134295 + UpdateDate.GetHashCode();
+			hashCode = hashCode * -1521134295 + PurchaseRequestId.GetHashCode();
+			return hashCode;
+		}
 	}
 }
